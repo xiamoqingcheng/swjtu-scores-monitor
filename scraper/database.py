@@ -1,4 +1,4 @@
-import os
+import json
 from upstash_redis import Redis
 from datetime import datetime
 
@@ -29,18 +29,18 @@ def get_latest_scores():
     """
     从 Upstash Redis 中获取最新的一份成绩单。
     """
-    # 获取所有以 "scores:" 开头的 key
-    # upstash-redis SDK 默认返回解码后的字符串列表
-    score_keys = redis.keys("scores:*") # <-- 直接赋值，并重命名变量
+    score_keys = redis.keys("scores:*")
     if not score_keys:
-        return None
+        return None # 或者返回一个空列表 [] 会更友好
     
-    # 不需要再解码了，因为 score_keys 本身就是字符串列表
-    
-    # 按时间倒序排列 key
     latest_key = sorted(score_keys, reverse=True)[0]
     
     print(f"--- 正在从 Key '{latest_key}' 读取最新成绩 ---")
     
-    # 使用 redis.get() 获取数据，SDK 会自动反序列化 JSON
-    return redis.get(latest_key)
+    json_data_string = redis.get(latest_key) # 获取到的是JSON字符串
+    
+    if not json_data_string:
+        return None # 或者 []
+
+    # 在返回前，将 JSON 字符串解析成 Python 对象 (列表)
+    return json.loads(json_data_string) # <--- 添加这一步！

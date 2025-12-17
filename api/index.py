@@ -23,6 +23,7 @@ def get_api_key(api_key: str = Security(api_key_query)):
     else:
         raise HTTPException(status_code=403, detail="提供的密钥无效或缺失")
 
+@app.get("/api/fetch-scores") 
 @app.post("/api/fetch-scores")
 async def trigger_fetch_scores(api_key: str = Security(get_api_key)):
     username = os.environ.get("SWJTU_USERNAME")

@@ -20,7 +20,7 @@ jobs:
           API_URL: ${{ secrets.API_URL }}
         run: |
           # 构建完整的 URL（确保格式正确）
-          FULL_URL="${API_BASE_URL}/api/monitor-scores?secret=${API_SECRET}"
+          FULL_URL="${API_URL}api/monitor-scores?secret=${API_SECRET}"
           
           echo "Sending request to: $FULL_URL"
           curl -X GET "$FULL_URL"

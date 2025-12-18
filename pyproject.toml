@@ -3,7 +3,7 @@ name = "swjtu-score-monitor"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = "==3.12.*"
 dependencies = [
     #"azure-functions>=1.24.0",
     "bs4==0.0.2",

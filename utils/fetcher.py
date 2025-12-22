@@ -178,7 +178,6 @@ class ScoreFetcher:
             print("未能获取平时成绩。")
             raise Exception("未能获取平时成绩。")
 
-        print(f"获取到 {len(normal_scores)} 门课程的平时成绩")
         # 创建一个快速查找平时成绩的字典
         # key: (课程名称, 教师)
         normal_scores_map = {(ns['课程名称'], ns['教师']): {
